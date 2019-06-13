@@ -23,6 +23,12 @@ public class AlbumController {
      return "allAlbums";
     }
 
+
+    /**
+     * reference:https://spring.io/guides/gs/serving-web-content/
+     *Modle @param
+     *the html called"album" as string @return
+     */
     @GetMapping("/album")
     public String albumCreate(Model m){
         m.addAttribute("album",new Album());
