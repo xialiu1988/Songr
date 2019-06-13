@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Album</title>
+</head>
+<body>
+<h1>Create new Album</h1>
+<form action="#" th:action="@{/album}" th:object="${album}" method="post">
+    <p>Title: <input type="text" th:field="*{title}"/></p>
+    <p>Artist: <input type="text" th:field="*{artist}"/></p>
+    <p>Song Counts: <input type="number" th:field="*{songCount}"/></p>
+    <p>Length: <input type="text" th:field="*{length}"/></p>
+    <p>Image URL: <input type="text" th:field="*{imageUrl}"/></p>
+    <p><input type="submit" value="Submit"/><input type="reset" value="Rest" /> </p>
+</form>
+
+</body>
+</html>

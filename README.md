@@ -14,6 +14,14 @@ It has three routes:
 /reverse?sentence=Hello world      will reverse the words position in the input sentence
 
 
+/albums    display all albums from the database and has a herf link to link to the form to add new album
+
+/album     create new album and save to database and redirect to the home page after add the new album
+
+
+
+
+
 How to run:
 1. ./gradlew bootRun
 
@@ -23,3 +31,6 @@ How to run:
 
   e.g localhost:8080/hello
       you should see "Hello, World" on the page
+      
+ 
+run the app and go to localhost:8080/albums 
