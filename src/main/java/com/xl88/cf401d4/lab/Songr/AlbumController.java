@@ -48,7 +48,6 @@ public class AlbumController {
 
 
 
-
     /**
      * reference:https://spring.io/guides/gs/serving-web-content/
      *Modle @param

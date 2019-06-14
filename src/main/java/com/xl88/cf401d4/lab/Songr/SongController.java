@@ -33,14 +33,15 @@ public class SongController {
      }
 
      //updating song
-//    @PostMapping("/updatesong/{id}")
-//    public RedirectView update(@PathVariable Long id, @RequestParam int length,@RequestParam int trackNumber){
-//        Song s = songRepository.findById(id).get();
-//         s.length=length;
-//         s.trackNumber=trackNumber;
-//           songRepository.save(s);
-//        return new RedirectView("songDetail");
-//
-//    }
+    @PostMapping("/updatesong/{id}")
+    public String update(@PathVariable Long id, @RequestParam int length,@RequestParam int trackNumber){
+        Song s = songRepository.findById(id).get();
+         s.length=length;
+         s.trackNumber=trackNumber;
+           songRepository.save(s);
+           System.out.println(s.length);
+        return "redirect:/songs";
+
+    }
 
 }
