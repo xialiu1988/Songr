@@ -5,6 +5,8 @@
     <title>All Albums</title>
 </head>
 <body>
+<h1>Welcom to our music land</h1>
+<a href="/songs">View All Songs Here</a><br>
 <a href="/album">Add a New Album </a>
 <ul>
     <li th:each="album: ${albums}">
@@ -12,7 +14,7 @@
         Album title:  <span  th:text="${album.title}"></span><br>
         Artist:  <span th:text="${album.artist}"></span><br>
         There are   <span th:text="${album.songCount}"></span> songs in the album<br>
-        Total length is   <span th:text="${album.length}"></span><br>
+        Total length is   <span th:text="${album.length}"></span> seconds<br>
         <a th:href="@{'/albumDetail/'+ ${album.id}}">View Details</a>
     </li>
 </ul>

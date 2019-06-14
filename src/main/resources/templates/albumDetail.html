@@ -17,6 +17,15 @@
           ( <span th:text="${song.length}"></span> seconds)
        </li>
    </ul>
+   <h3>Add a new Song to this album</h3>
 
+   <form th:action="@{'/albumDetail/'+${albumdetail.id}}" method="post">
+       <label for="title">Song Title:</label><input name="title" id="title" type="text"/>
+       <label for="length">Length:</label><input name="length" id="length" type="number"/>
+       <label for="trackNumber">Track Number in this album:</label><input name="trackNumber" id="trackNumber" type="number"/>
+       <p><input type="submit" value="Submit"/><input type="reset" value="Reset" /> </p>
+   </form>
+
+   <a href="/albums">Home</a>
 </body>
 </html>

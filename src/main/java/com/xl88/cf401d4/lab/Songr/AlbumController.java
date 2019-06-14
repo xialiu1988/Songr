@@ -12,7 +12,8 @@ import java.util.List;
 public class AlbumController {
     @Autowired
     AlbumRepository albumRepository;
-
+    @Autowired
+    SongRepository songRepository;
     @GetMapping("/albums")
     public String getALlalbums(Model m){
 
@@ -26,8 +27,27 @@ public class AlbumController {
     public String getOneAlbumDetail(@PathVariable Long id,Model m){
         Album a = albumRepository.findById(id).get();
         m.addAttribute("albumdetail",a);
+        m.addAttribute("newsong",new Song());
         return "albumDetail";
     }
+
+//good example--my reference
+//https://stackoverflow.com/questions/22794057/thymeleaf-send-parameter-from-html-to-controller
+
+    @RequestMapping(value="albumDetail/{id}",method = RequestMethod.POST)
+    public String getOneAlbumDetail(@PathVariable Long id,@RequestParam String title,@RequestParam int length,@RequestParam int trackNumber){
+        //get the album where new song wants to add in
+        Album a = albumRepository.findById(id).get();
+        //create a new song
+        Song newsong= new Song(title,length,trackNumber,a);
+        songRepository.save(newsong);
+        return "redirect:/albumDetail/{id}";
+    }
+
+
+
+
+
 
     /**
      * reference:https://spring.io/guides/gs/serving-web-content/
