@@ -11,8 +11,9 @@
             Title: <span th:text="${song.title}"></span><br>
                Length:<span th:text="${song.length}"></span> seconds<br>
             TrackNumber:   <span th:text="${song.trackNumber}"></span>
-             in  <a th:href="@{'/albumDetail/'+${song.album.id}}" th:text="${song.album.title}"></a> album
+             in  <a th:href="@{'/albumDetail/'+${song.album.id}}" th:text="${song.album.title}"></a> album<br>
                <a th:href="@{'/updatesong/'+ ${song.id}}">Update</a>
+               <a th:href="@{'/deletesong/'+ ${song.id}}">Delete</a>
            </li>
        </ul>
 

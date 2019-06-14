@@ -44,4 +44,11 @@ public class SongController {
 
     }
 
+    @GetMapping("/deletesong/{id}")
+    public String delete(@PathVariable Long id){
+        Song s = songRepository.findById(id).get();
+        songRepository.delete(s);
+        return "redirect:/songs";
+    }
+
 }
