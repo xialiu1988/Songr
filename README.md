@@ -18,8 +18,9 @@ It has three routes:
 
 /album     create new album and save to database and redirect to the home page after add the new album
 
+/songs      display all the songs on the page
 
-
+/albumDetail/{id}  get one album detail with all the details including songs in the album
 
 
 How to run:
@@ -34,3 +35,14 @@ How to run:
       
  
 run the app and go to localhost:8080/albums 
+
+Home page route: /albums
+ 
+View all songs-- display all songs 
+
+Create new Album -- create new album
+
+for each album there is link to view details about that specific album.
+
+in the album detail page-- you are able to add one song to this album 
+
