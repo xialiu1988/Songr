@@ -3,9 +3,7 @@ package com.xl88.cf401d4.lab.Songr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.PublicKey;
 import java.util.List;
@@ -23,6 +21,13 @@ public class AlbumController {
      return "allAlbums";
     }
 
+   //get details of a single album by id
+    @RequestMapping(value="albumDetail/{id}",method = RequestMethod.GET)
+    public String getOneAlbumDetail(@PathVariable Long id,Model m){
+        Album a = albumRepository.findById(id).get();
+        m.addAttribute("albumdetail",a);
+        return "albumDetail";
+    }
 
     /**
      * reference:https://spring.io/guides/gs/serving-web-content/

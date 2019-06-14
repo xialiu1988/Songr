@@ -5,15 +5,17 @@
     <title>All Albums</title>
 </head>
 <body>
+<a href="/album">Add a New Album </a>
 <ul>
-       <li th:each="album: ${albums}">
-           <img th:src="${album.imageUrl}"  height="200px" width="200px"/><br>
-       Album title:  <span  th:text="${album.title}"></span><br>
-       Artist:  <span th:text="${album.artist}"></span><br>
-           There are   <span th:text="${album.songCount}"></span> songs in the album<br>
+    <li th:each="album: ${albums}">
+        <img th:src="${album.imageUrl}"  height="200px" width="200px"/><br>
+        Album title:  <span  th:text="${album.title}"></span><br>
+        Artist:  <span th:text="${album.artist}"></span><br>
+        There are   <span th:text="${album.songCount}"></span> songs in the album<br>
         Total length is   <span th:text="${album.length}"></span><br>
-       </li>
+        <a th:href="@{'/albumDetail/'+ ${album.id}}">View Details</a>
+    </li>
 </ul>
-<a href="/album">Add album </a>
+
 </body>
 </html>

@@ -1,9 +1,7 @@
 package com.xl88.cf401d4.lab.Songr;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Album {
@@ -13,12 +11,12 @@ public class Album {
     String title;
     String artist;
     int songCount;
-    String length;
+    int length;
     String imageUrl;
-
-
+@OneToMany(mappedBy = "album")
+   List<Song> songs;
     public Album(){}
-    public Album(String title,String artist,int songCount,String length,String imageUrl){
+    public Album(String title,String artist,int songCount,int length,String imageUrl){
       this.title = title;
       this.artist=artist;
       this.songCount=songCount;
@@ -29,26 +27,27 @@ public class Album {
 
 
     //getters
-    public String getTitle(){
-        return this.title;
-    }
+    public  long getId(){return id;}
+    public String getTitle(){ return title; }
 
     public String getArtist(){
-        return this.artist;
+        return artist;
     }
 
     public int getSongCount(){
-        return this.songCount;
+        return songCount;
     }
 
-    public String getLength(){
-        return this.length;
+    public int getLength(){
+        return length;
     }
 
     public String getImageUrl(){
-        return this.imageUrl;
+        return imageUrl;
     }
 
+
+    public List<Song> getSongs(){return songs;}
     //setters
     public void setTitle(String title){
         this.title=title;
@@ -59,7 +58,7 @@ public class Album {
     public void setSongCount(int songCount){
         this.songCount=songCount;
     }
-    public void setLength(String length){
+    public void setLength(int length){
         this.length=length;
     }
 
