@@ -14,15 +14,20 @@ public class AlbumController {
     AlbumRepository albumRepository;
     @Autowired
     SongRepository songRepository;
+
     @GetMapping("/albums")
     public String getALlalbums(Model m){
-
      Iterable<Album> albums=albumRepository.findAll();
      m.addAttribute("albums",albums);
      return "allAlbums";
     }
 
+
+
+    //good example--my reference
+    //https://stackoverflow.com/questions/22794057/thymeleaf-send-parameter-from-html-to-controller
    //get details of a single album by id
+    //old way
     @RequestMapping(value="albumDetail/{id}",method = RequestMethod.GET)
     public String getOneAlbumDetail(@PathVariable Long id,Model m){
         Album a = albumRepository.findById(id).get();
@@ -31,19 +36,42 @@ public class AlbumController {
         return "albumDetail";
     }
 
-//good example--my reference
-//https://stackoverflow.com/questions/22794057/thymeleaf-send-parameter-from-html-to-controller
 
-    @RequestMapping(value="albumDetail/{id}",method = RequestMethod.POST)
+
+    @PostMapping("albumDetail/{id}")
     public String getOneAlbumDetail(@PathVariable Long id,@RequestParam String title,@RequestParam int length,@RequestParam int trackNumber){
         //get the album where new song wants to add in
         Album a = albumRepository.findById(id).get();
         //create a new song
-        Song newsong= new Song(title,length,trackNumber,a);
-        songRepository.save(newsong);
+        //update songCount in the album
+        //calculate the length of all the songs
+        if(!a.songs.isEmpty()) {
+            Song newsong= new Song(title,length,trackNumber,a);
+            songRepository.save(newsong);
+            System.out.println(a.songCount);
+            int totalLength = 0;
+            for (Song s : a.songs) {
+                totalLength = totalLength + s.length;
+            }
+            a.setLength(totalLength+newsong.length);
+            a.setSongCount(a.songs.size()+1);
+            System.out.println("running");
+        }
+        else {
+            Song newsong= new Song(title,length,trackNumber,a);
+            songRepository.save(newsong);
+            System.out.println(a.songCount);
+            System.out.println("playing");
+            a.setLength(newsong.length);
+            a.setSongCount(1);
+            System.out.println(a.songCount);
+        }
+
+        albumRepository.save(a);
+        System.out.println(a.length);
+        System.out.println(a.songCount);
         return "redirect:/albumDetail/{id}";
     }
-
 
 
 

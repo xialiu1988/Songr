@@ -8,6 +8,7 @@
 
    <h1 th:text="${oneSong.title}"></h1>
  <form th:action="@{'/updatesong/'+${oneSong.id}}"method="post">
+     <label for="title">Title:</label><input name="title" id="title" type="text"  th:value="${oneSong.title}" />
      <label for="length">Length:</label><input name="length" id="length" type="number"  th:value="${oneSong.length}" />
      <label for="trackNumber">Track Number:</label><input name="trackNumber" id="trackNumber" type="number" th:value="${oneSong.trackNumber}" />
      <p><input type="submit" value="Submit"/><input type="reset" value="Reset" /> </p>

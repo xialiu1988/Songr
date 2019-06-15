@@ -15,7 +15,8 @@ public class SongController {
     @Autowired
     SongRepository songRepository;
 
-
+   @Autowired
+   AlbumRepository albumRepository;
     @GetMapping("/songs")
     public String getAllSongs(Model m){
         Iterable<Song> songs=songRepository.findAll();
@@ -34,11 +35,22 @@ public class SongController {
 
      //updating song
     @PostMapping("/updatesong/{id}")
-    public String update(@PathVariable Long id, @RequestParam int length,@RequestParam int trackNumber){
+    public String update(@PathVariable Long id,@RequestParam String title, @RequestParam int length,@RequestParam int trackNumber){
         Song s = songRepository.findById(id).get();
-         s.length=length;
-         s.trackNumber=trackNumber;
+          s.setTitle(title);
+          s.setLength(length);
+          s.setTrackNumber(trackNumber);
            songRepository.save(s);
+
+           //update album length
+        int total=0;
+         for(Song n:s.album.songs)  {
+             total+=n.length;
+         }
+           s.album.setLength(total);
+
+         albumRepository.save(s.album);
+
            System.out.println(s.length);
         return "redirect:/songs";
 
@@ -48,6 +60,18 @@ public class SongController {
     public String delete(@PathVariable Long id){
         Song s = songRepository.findById(id).get();
         songRepository.delete(s);
+        //after delete song update album songcount
+        s.album.setSongCount(s.album.songs.size());
+
+        //update album length
+        int total=0;
+        for(Song n:s.album.songs)  {
+            total+=n.length;
+        }
+        s.album.setLength(total);
+
+        albumRepository.save(s.album);
+
         return "redirect:/songs";
     }
 
