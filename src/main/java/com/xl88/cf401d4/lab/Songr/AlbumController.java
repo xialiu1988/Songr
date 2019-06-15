@@ -48,7 +48,6 @@ public class AlbumController {
         if(!a.songs.isEmpty()) {
             Song newsong= new Song(title,length,trackNumber,a);
             songRepository.save(newsong);
-            System.out.println(a.songCount);
             int totalLength = 0;
             for (Song s : a.songs) {
                 totalLength = totalLength + s.length;
@@ -60,16 +59,11 @@ public class AlbumController {
         else {
             Song newsong= new Song(title,length,trackNumber,a);
             songRepository.save(newsong);
-            System.out.println(a.songCount);
-            System.out.println("playing");
             a.setLength(newsong.length);
             a.setSongCount(1);
-            System.out.println(a.songCount);
         }
 
         albumRepository.save(a);
-        System.out.println(a.length);
-        System.out.println(a.songCount);
         return "redirect:/albumDetail/{id}";
     }
 
